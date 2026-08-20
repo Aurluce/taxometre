@@ -1,0 +1,214 @@
+/* src/styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  /* Couleurs personnalisées */
+  --color-primary-50: #e8f0f5;
+  --color-primary-100: #d1e1eb;
+  --color-primary-200: #a3c3d7;
+  --color-primary-300: #75a5c3;
+  --color-primary-400: #4787af;
+  --color-primary-500: #0f3b5c;
+  --color-primary-600: #0c2f4a;
+  --color-primary-700: #092338;
+  --color-primary-800: #061826;
+  --color-primary-900: #030c14;
+  
+  --color-secondary-50: #f0f2f5;
+  --color-secondary-100: #e1e5eb;
+  --color-secondary-200: #c3cbd7;
+  --color-secondary-300: #a5b1c3;
+  --color-secondary-400: #8797af;
+  --color-secondary-500: #4a7c9c;
+  --color-secondary-600: #3b637d;
+  --color-secondary-700: #2c4a5e;
+  --color-secondary-800: #1e323f;
+  --color-secondary-900: #0f191f;
+  
+  /* Polices */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
+  /* Animations personnalisées */
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+  --animate-slide-up: slideUp 0.5s ease-out;
+  --animate-slide-down: slideDown 0.5s ease-out;
+  --animate-scale-in: scaleIn 0.3s ease-out;
+  --animate-bounce-in: bounceIn 0.6s ease-out;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Styles de base */
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --foreground: #f8fafc;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Composants utilitaires personnalisés */
+@layer components {
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-500 text-white px-4 py-2.5 rounded-lg font-medium 
+           hover:bg-primary-600 transition-all duration-200 shadow-sm hover:shadow-md 
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-700 px-4 py-2.5 rounded-lg font-medium 
+           hover:bg-gray-200 transition-all duration-200;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-primary-500 text-primary-500 px-4 py-2 rounded-lg font-medium 
+           hover:bg-primary-500 hover:text-white transition-all duration-200;
+  }
+  
+  .input-primary {
+    @apply w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-800 
+           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 
+           focus:border-transparent transition-all duration-200;
+  }
+  
+  .input-dark {
+    @apply w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white 
+           placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 
+           focus:border-transparent transition-all duration-200;
+  }
+  
+  .badge {
+    @apply px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-success {
+    @apply bg-green-100 text-green-700;
+  }
+  
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-700;
+  }
+  
+  .badge-danger {
+    @apply bg-red-100 text-red-700;
+  }
+  
+  .badge-info {
+    @apply bg-blue-100 text-blue-700;
+  }
+  
+  .badge-gray {
+    @apply bg-gray-100 text-gray-700;
+  }
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-300;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-400;
+}
+
+/* Sélection de texte */
+::selection {
+  @apply bg-primary-500 text-white;
+}
+
+/* Focus visible pour accessibilité */
+*:focus-visible {
+  @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+}
+
+/* Animations de transition de page */
+.page-enter {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.page-exit {
+  animation: fadeIn 0.3s ease-out reverse;
+}
+
+/* Classes utilitaires supplémentaires */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent;
+}
+
+.shadow-glow {
+  box-shadow: 0 0 40px rgba(15, 59, 92, 0.15);
+}
+
+/* Grid de fond animé */
+.bg-grid {
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(15, 59, 92, 0.05) 1px, transparent 0);
+  background-size: 40px 40px;
+}
