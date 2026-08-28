@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import { TruckIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
@@ -137,14 +138,6 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
-              Pas encore de compte?{' '}
-              <a href="#" className="text-primary-600 hover:text-primary-800 font-medium">
-                Contactez l'administrateur
-              </a>
-            </p>
-          </div>
         </div>
 
         {/* Footer */}

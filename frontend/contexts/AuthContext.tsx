@@ -77,7 +77,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await apiClient.login(username, password);
       setToken(response.access);
-      
+      if (response.refresh) {
+        localStorage.setItem('refresh_token', response.refresh);
+      }
+
       // User data is now returned directly from login
       if (response.user) {
         setUser(response.user);
@@ -94,6 +97,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     apiClient.logout();
     localStorage.removeItem('user');
     localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     router.push('/login');
   };
 

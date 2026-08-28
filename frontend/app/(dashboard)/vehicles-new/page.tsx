@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import VehicleForm from '@/components/vehicles/VehicleForm';
+import apiClient from '@/lib/api';
 
 export default function NewVehiclePage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,23 +12,14 @@ export default function NewVehiclePage() {
   const handleSubmit = async (data: any) => {
     setIsLoading(true);
     setError(null);
-    
-    try {
-      const response = await fetch('http://localhost:8000/api/vehicles/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-        },
-        body: JSON.stringify(data),
-      });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Erreur lors de la création du véhicule');
+    try {
+      const token = localStorage.getItem('access_token');
+      if (!token) {
+        throw new Error('Informations d\'authentification non fournies. Veuillez vous reconnecter.');
       }
 
-      const vehicle = await response.json();
+      const vehicle = await apiClient.createVehicle(data);
       setCreatedVehicle(vehicle);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Une erreur est survenue');

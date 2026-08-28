@@ -23,6 +23,14 @@ class ApiClient {
     }
   }
 
+  setRefreshToken(token: string | null) {
+    if (token) {
+      localStorage.setItem('refresh_token', token);
+    } else {
+      localStorage.removeItem('refresh_token');
+    }
+  }
+
   private async request<T>(
     endpoint: string,
     options: RequestInit = {}
@@ -93,7 +101,9 @@ class ApiClient {
         body: JSON.stringify({ username, password }),
       }
     );
+
     this.setToken(response.access);
+    this.setRefreshToken(response.refresh);
     return response;
   }
 
@@ -126,6 +136,7 @@ class ApiClient {
       console.error('Logout error:', error);
     } finally {
       this.setToken(null);
+      this.setRefreshToken(null);
     }
   }
 
