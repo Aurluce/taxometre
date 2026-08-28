@@ -1,5 +1,7 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://taxometre-api.onrender.com/api';
 
+//const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+
 
 class ApiClient {
   private baseUrl: string;
